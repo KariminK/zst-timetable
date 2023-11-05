@@ -1,0 +1,30 @@
+.lessons {
+  text-align: center;
+}
+table {
+  width: 100%;
+  border-spacing: 0px;
+  border-top: 1px solid #007ea7;
+}
+thead {
+  background-color: rgb(194, 33, 33);
+  color: rgb(247, 238, 238);
+}
+thead tr {
+  padding: 2px 5px;
+  display: grid;
+  height: 50px;
+  text-align: center;
+  place-items: center;
+  grid-template-columns: 2fr 3fr 1fr;
+}
+
+h1 {
+  padding: 10px;
+  color: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 17, 43, 1) 0%,
+    rgba(11, 23, 40, 1) 100%
+  );
+}
