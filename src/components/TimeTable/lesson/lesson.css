@@ -1,11 +1,11 @@
 .lesson {
-  padding: 10px 5px;
+  padding: 12px 5px;
   color: #00171f;
-  display: grid;
-  grid-template-columns: 2fr 3fr 1fr;
-  height: 30px;
-  place-items: center;
 }
 .lesson:nth-child(2n) {
   background-color: #ececec;
+}
+
+.lesson td:nth-child(3) {
+  font-weight: bold;
 }

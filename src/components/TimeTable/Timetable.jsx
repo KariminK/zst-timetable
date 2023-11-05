@@ -19,7 +19,6 @@ const Timetable = ({ timetable, day, hours, group }) => {
       textDay = "Poniedziałek";
   }
   const currentDayTimetable = timetable[day];
-  console.log(currentDayTimetable);
   let elements = [];
   if (currentDayTimetable) {
     const flatTimetable = currentDayTimetable.reduce((acc, curr) => {
@@ -36,17 +35,29 @@ const Timetable = ({ timetable, day, hours, group }) => {
       return acc;
     }, []);
     elements = flatTimetable.map((element, index) => {
-      return <Lesson lesson={element} hour={hours[index + 1]} />;
+      return (
+        <Lesson
+          lesson={element}
+          nr={index + 1}
+          hour={hours[index + 1]}
+          key={index}
+        />
+      );
     });
   }
   return (
     <div className="lessons">
-      <h1>{textDay}</h1>
+      <h1>
+        {textDay} {`(Grupa ${group})`}
+      </h1>
       <table>
+        <colgroup></colgroup>
         <thead>
           <tr>
+            <th>Nr</th>
             <th>Godzina</th>
             <th>Lekcja</th>
+            <th>Nauczyciel</th>
             <th>Sala</th>
           </tr>
         </thead>

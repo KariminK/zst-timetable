@@ -1,0 +1,51 @@
+.selectDay {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 5px;
+}
+.dayChangeBtn {
+  width: 50px;
+  height: 50px;
+  font-size: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(194, 33, 33);
+  color: white;
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: 33px;
+  transition: background-color 200ms, color 200ms;
+}
+#changeGroupBtn {
+  height: 100%;
+  padding: 0px 15px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid white;
+  background-color: rgb(194, 33, 33);
+  color: white;
+  transition: background-color 200ms, color 200ms;
+  cursor: pointer;
+}
+#changeGroupBtn:hover,
+.dayChangeBtn:hover {
+  background-color: white;
+  color: rgb(194, 33, 33);
+  border-color: rgb(194, 33, 33);
+}
+@media screen and (min-width: 1024px) {
+  .selectDay {
+    display: flex;
+    justify-content: space-between;
+    position: static;
+    padding: 5px;
+    width: 500px;
+    margin-inline: auto;
+    margin-top: 10px;
+  }
+}

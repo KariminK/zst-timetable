@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import Timetable from "./components/TimeTable/Timetable";
+import SelectDay from "./components/SelectDay/SelectDay";
 function App() {
-  const [day, setDay] = useState(3);
+  const [day, setDay] = useState(0);
+  const [group, setGroup] = useState(1);
   const [timetable, setTimetable] = useState([]);
   const [hours, setHours] = useState([]);
+
   const fetchdata = async () => {
     const [hoursRes, tableRes] = await Promise.all([
       fetch("http://127.0.0.1:3000/hours"),
@@ -19,9 +22,27 @@ function App() {
   useEffect(() => {
     fetchdata();
   }, []);
+  const incrementDayHandle = () => {
+    if (day != 4) setDay(day + 1);
+  };
+  const decrementDayHandle = () => {
+    if (day != 0) setDay(day - 1);
+  };
+  const changeGroupHandle = () => {
+    if (group == 1) {
+      setGroup(2);
+    } else {
+      setGroup(1);
+    }
+  };
   return (
     <>
-      <Timetable day={3} timetable={timetable} hours={hours} group={1} />
+      <Timetable day={day} timetable={timetable} hours={hours} group={group} />
+      <SelectDay
+        onDecrementDay={decrementDayHandle}
+        onIncrementDay={incrementDayHandle}
+        onChangeGroup={changeGroupHandle}
+      />
     </>
   );
 }
