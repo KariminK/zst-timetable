@@ -1,5 +1,10 @@
 import "./selectDay.css";
-const SelectDay = ({ onIncrementDay, onDecrementDay, onChangeGroup }) => {
+const SelectDay = ({
+  onIncrementDay,
+  onDecrementDay,
+  onChangeGroup,
+  onShowSelectClass,
+}) => {
   return (
     <div className="selectDay">
       <button
@@ -12,6 +17,9 @@ const SelectDay = ({ onIncrementDay, onDecrementDay, onChangeGroup }) => {
       <div className="groupSelect">
         <button id="changeGroupBtn" onClick={onChangeGroup}>
           Zmień grupę
+        </button>
+        <button id="showSelectClassFormBtn" onClick={onShowSelectClass}>
+          Wybierz klasę
         </button>
       </div>
       <button

@@ -2,10 +2,11 @@
   display: flex;
   justify-content: space-between;
   position: fixed;
-  bottom: 0;
+  bottom: 0px;
   left: 0;
   right: 0;
   padding: 5px;
+  align-items: center;
 }
 .dayChangeBtn {
   width: 50px;
@@ -21,8 +22,25 @@
   border-radius: 33px;
   transition: background-color 200ms, color 200ms;
 }
+.groupSelect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
 #changeGroupBtn {
-  height: 100%;
+  height: 45px;
+  padding: 0px 15px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid white;
+  background-color: rgb(194, 33, 33);
+  color: white;
+  transition: background-color 200ms, color 200ms;
+  cursor: pointer;
+}
+#showSelectClassFormBtn {
+  height: 45px;
   padding: 0px 15px;
   font-size: 20px;
   border-radius: 5px;
@@ -33,6 +51,7 @@
   cursor: pointer;
 }
 #changeGroupBtn:hover,
+#showSelectClassFormBtn:hover,
 .dayChangeBtn:hover {
   background-color: white;
   color: rgb(194, 33, 33);
