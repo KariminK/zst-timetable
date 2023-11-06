@@ -1,12 +1,1 @@
-#showSelectClassFormBtn {
-  margin-inline: auto;
-  display: block;
-  padding: 10px 15px;
-  font-size: 20px;
-  border-radius: 5px;
-  border: 1px solid white;
-  background-color: rgb(194, 33, 33);
-  color: white;
-  transition: background-color 200ms, color 200ms;
-  cursor: pointer;
-}
+
