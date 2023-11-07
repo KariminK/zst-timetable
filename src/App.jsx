@@ -14,7 +14,7 @@ function App() {
 
   const fetchdata = async () => {
     const [hoursRes, tableRes, classRes] = await Promise.all([
-      fetch("http://127.0.0.1:3000/hours"),
+      fetch("http://127.0.0.1:3000/hours?id=" + classId),
       fetch("http://127.0.0.1:3000/table?id=" + classId),
       fetch("http://127.0.0.1:3000/classes"),
     ]);
@@ -46,10 +46,17 @@ function App() {
   const selectClassHandle = (e) => {
     const classNum = e.target.id.slice(5, e.target.id.length);
     setClassId(classNum);
+    setShowForm(false);
   };
   return (
     <>
-      <Timetable day={day} timetable={timetable} hours={hours} group={group} />
+      <Timetable
+        day={day}
+        timetable={timetable}
+        hours={hours}
+        group={group}
+        nameClass={classes[classId - 1]?.name}
+      />
       <SelectDay
         onDecrementDay={decrementDayHandle}
         onIncrementDay={incrementDayHandle}
@@ -58,11 +65,12 @@ function App() {
           !showForm ? setShowForm(true) : setShowForm(false)
         }
       />
-
+      <div className="placeholder"></div>
       <SelectClass
         onSelect={selectClassHandle}
         classes={classes}
         visible={showForm}
+        activeBtn={classId}
       />
     </>
   );

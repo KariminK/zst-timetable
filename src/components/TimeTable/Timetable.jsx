@@ -1,6 +1,6 @@
 import Lesson from "./lesson/Lesson";
 import "./timetable.css";
-const Timetable = ({ timetable, day, hours, group }) => {
+const Timetable = ({ timetable, day, hours, group, nameClass }) => {
   let textDay = "Poniedziałek";
   switch (day) {
     case 1:
@@ -48,7 +48,7 @@ const Timetable = ({ timetable, day, hours, group }) => {
   return (
     <div className="lessons">
       <h1>
-        {textDay} {`(Grupa ${group})`}
+        {textDay} {`(${nameClass} Grupa ${group})`}
       </h1>
       <table>
         <colgroup></colgroup>

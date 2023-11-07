@@ -9,9 +9,9 @@
   align-items: center;
 }
 .dayChangeBtn {
-  width: 50px;
-  height: 50px;
-  font-size: 36px;
+  height: 45px;
+  aspect-ratio: 1/1;
+  font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,9 +29,10 @@
   flex-wrap: wrap;
 }
 #changeGroupBtn {
-  height: 45px;
-  padding: 0px 15px;
-  font-size: 20px;
+  height: 40px;
+  width: 125px;
+  padding: 0px 10px;
+  font-size: 16px;
   border-radius: 5px;
   border: 1px solid white;
   background-color: rgb(194, 33, 33);
@@ -40,9 +41,10 @@
   cursor: pointer;
 }
 #showSelectClassFormBtn {
-  height: 45px;
-  padding: 0px 15px;
-  font-size: 20px;
+  height: 40px;
+  width: 125px;
+  padding: 0px 10px;
+  font-size: 16px;
   border-radius: 5px;
   border: 1px solid white;
   background-color: rgb(194, 33, 33);
@@ -56,6 +58,13 @@
   background-color: white;
   color: rgb(194, 33, 33);
   border-color: rgb(194, 33, 33);
+}
+@media screen and (min-width: 500px) {
+  #showSelectClassFormBtn,
+  #changeGroupBtn {
+    font-size: 18px;
+    width: 140px;
+  }
 }
 @media screen and (min-width: 1024px) {
   .selectDay {
