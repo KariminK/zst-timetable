@@ -40,12 +40,14 @@ function App() {
     if (group == 1) {
       setGroup(2);
     } else {
-      setGroup(1);
+      if (classId == 16 && group == 2) setGroup(3);
+      else setGroup(1);
     }
   };
   const selectClassHandle = (e) => {
     const classNum = e.target.id.slice(5, e.target.id.length);
     setClassId(classNum);
+    console.log(classId);
     setShowForm(false);
   };
   return (
