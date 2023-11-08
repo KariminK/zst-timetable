@@ -1,5 +1,5 @@
 {
-  "name": "ZST Timetable",
+  "name": "zst-timetable-parser",
   "private": true,
   "version": "0.0.0",
   "type": "module",
