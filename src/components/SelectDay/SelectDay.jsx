@@ -4,16 +4,10 @@ const SelectDay = ({
   onDecrementDay,
   onChangeGroup,
   onShowSelectClass,
+  onShowSelectClassroom,
 }) => {
   return (
     <div className="selectDay">
-      <button
-        id="decrementDay"
-        className="dayChangeBtn"
-        onClick={onDecrementDay}
-      >
-        ←
-      </button>
       <div className="groupSelect">
         <button id="changeGroupBtn" onClick={onChangeGroup}>
           Zmień grupę
@@ -21,14 +15,26 @@ const SelectDay = ({
         <button id="showSelectClassFormBtn" onClick={onShowSelectClass}>
           Wybierz klasę
         </button>
+        <button id="selectClassroomBtn" onClick={onShowSelectClassroom}>
+          Wybierz salę
+        </button>
       </div>
-      <button
-        id="incrementDay"
-        className="dayChangeBtn"
-        onClick={onIncrementDay}
-      >
-        →
-      </button>
+      <div className="selectDayBtns">
+        <button
+          id="decrementDay"
+          className="dayChangeBtn"
+          onClick={onDecrementDay}
+        >
+          ←
+        </button>
+        <button
+          id="incrementDay"
+          className="dayChangeBtn"
+          onClick={onIncrementDay}
+        >
+          →
+        </button>
+      </div>
     </div>
   );
 };

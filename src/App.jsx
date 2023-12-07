@@ -11,6 +11,7 @@ function App() {
   const [timetable, setTimetable] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [hours, setHours] = useState([]);
+  const [classroom, setClassroom] = useState("");
 
   const fetchdata = async () => {
     const [hoursRes, tableRes, classRes] = await Promise.all([
