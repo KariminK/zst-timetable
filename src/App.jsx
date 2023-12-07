@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import Timetable from "./components/TimeTable/Timetable";
-import SelectDay from "./components/SelectDay/SelectDay";
+import ControlPanel from "./components/ControlPanel/ControlPanel";
 import SelectClass from "./components/SelectClass/SelectClass";
 import "./app.css";
+import SelectClassroom from "./components/SelectClassroom/SelectClassroom";
 function App() {
   const [day, setDay] = useState(0);
   const [group, setGroup] = useState(1);
@@ -11,9 +12,52 @@ function App() {
   const [timetable, setTimetable] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [hours, setHours] = useState([]);
+  const [showClassroomSelection, setShowClassroomSelection] = useState(false);
   const [classroom, setClassroom] = useState("");
-
-  const fetchdata = async () => {
+  const classrooms = [
+    "55",
+    "52",
+    "18",
+    "73",
+    "74",
+    "16",
+    "22",
+    "wf2",
+    "57",
+    "26",
+    "A1",
+    "13",
+    "50",
+    "6",
+    "20",
+    "C1",
+    "56",
+    "Boisk1",
+    "19",
+    "71",
+    "42",
+    "79",
+    "65",
+    "21",
+    "72",
+    "77",
+    "48",
+    "84",
+    "A2",
+    "A3",
+    "53",
+    "69",
+    "24",
+    "5",
+    "82",
+    "Boisk2",
+    "wf1",
+    "41",
+    "81",
+    "75",
+  ];
+  classrooms.sort();
+  const fetchClassData = async () => {
     const [hoursRes, tableRes, classRes] = await Promise.all([
       fetch("http://127.0.0.1:3000/hours?id=" + classId),
       fetch("http://127.0.0.1:3000/table?id=" + classId),
@@ -28,9 +72,28 @@ function App() {
     setTimetable(tableData);
     setClasses(classData.classes);
   };
+  const fetchClassroomData = async () => {
+    if (classroom !== "") {
+      const [classroomRes, hoursRes] = await Promise.all([
+        fetch(
+          `http://127.0.0.1:3000/classRoomLessons?day=${day}&classroom=${classroom}`
+        ),
+        fetch("http://127.0.0.1:3000/hours?id=20"),
+      ]);
+      const [classroomData, hoursData] = await Promise.all([
+        classroomRes.json(),
+        hoursRes.json(),
+      ]);
+      setTimetable(classroomData);
+      setHours(hoursData);
+    }
+  };
   useEffect(() => {
-    fetchdata();
+    fetchClassData();
   }, [classId]);
+  useEffect(() => {
+    fetchClassroomData();
+  }, [classroom, day]);
   const incrementDayHandle = () => {
     if (day != 4) setDay(day + 1);
   };
@@ -47,9 +110,14 @@ function App() {
   };
   const selectClassHandle = (e) => {
     const classNum = e.target.id.slice(5, e.target.id.length);
+    setClassroom("");
     setClassId(classNum);
-    console.log(classId);
     setShowForm(false);
+  };
+  const selectClassroomHandle = (e) => {
+    setClassroom(e.target.textContent);
+    setShowClassroomSelection(false);
+    setClassId(-1);
   };
   return (
     <>
@@ -59,22 +127,32 @@ function App() {
         hours={hours}
         group={group}
         nameClass={classes[classId - 1]?.name}
+        classroom={classroom}
       />
-      <SelectDay
+      <ControlPanel
         onDecrementDay={decrementDayHandle}
         onIncrementDay={incrementDayHandle}
         onChangeGroup={changeGroupHandle}
-        onShowSelectClass={() =>
-          !showForm ? setShowForm(true) : setShowForm(false)
+        onShowSelectClass={() => !showClassroomSelection && setShowForm(true)}
+        onShowSelectClassroom={() =>
+          !showForm && setShowClassroomSelection(true)
         }
       />
       <div className="placeholder"></div>
-      <SelectClass
-        onSelect={selectClassHandle}
-        classes={classes}
-        visible={showForm}
-        activeBtn={classId}
-      />
+      {showForm && (
+        <SelectClass
+          onSelect={selectClassHandle}
+          classes={classes}
+          activeBtn={classId}
+        />
+      )}
+      {showClassroomSelection && (
+        <SelectClassroom
+          classrooms={classrooms}
+          currentClassroom={classroom}
+          onSelectClassroom={selectClassroomHandle}
+        />
+      )}
     </>
   );
 }

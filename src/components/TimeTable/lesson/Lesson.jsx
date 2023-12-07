@@ -1,5 +1,5 @@
 import "./lesson.css";
-const Lesson = ({ lesson, hour, nr }) => {
+const Lesson = ({ lesson, hour, nr, classname }) => {
   if (lesson) {
     return (
       <tr className="lesson">
@@ -9,7 +9,7 @@ const Lesson = ({ lesson, hour, nr }) => {
         </td>
         <td>{lesson?.subject}</td>
         <td>{lesson?.teacher}</td>
-        <td>{lesson?.room}</td>
+        <td>{!classname ? lesson?.room : classname}</td>
       </tr>
     );
   } else {

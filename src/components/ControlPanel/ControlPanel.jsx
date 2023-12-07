@@ -1,5 +1,5 @@
-import "./selectDay.css";
-const SelectDay = ({
+import "./controlPanel.css";
+const ControlPanel = ({
   onIncrementDay,
   onDecrementDay,
   onChangeGroup,
@@ -38,4 +38,4 @@ const SelectDay = ({
     </div>
   );
 };
-export default SelectDay;
+export default ControlPanel;
