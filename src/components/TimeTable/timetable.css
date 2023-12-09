@@ -51,7 +51,9 @@ h1 {
 td {
   font-size: 15px;
 }
-
+.placeholder {
+  height: 400px;
+}
 @media screen and (min-width: 425px) {
   thead tr,
   tbody tr {

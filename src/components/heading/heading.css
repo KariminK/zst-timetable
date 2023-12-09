@@ -1,0 +1,47 @@
+header {
+  padding: 10px;
+  font-size: 26px;
+  color: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 17, 43, 1) 0%,
+    rgba(11, 23, 40, 1) 100%
+  );
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+}
+h1 {
+  width: 400px;
+  font-size: 24px;
+  text-align: center;
+}
+.dayChangeBtn {
+  height: 45px;
+  aspect-ratio: 1/1;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(194, 33, 33);
+  cursor: pointer;
+  border: none;
+  border-radius: 33px;
+  transition: background-color 200ms, color 200ms;
+  fill: white;
+}
+.dayChangeBtn:hover {
+  background-color: white;
+  fill: rgb(194, 33, 33);
+}
+@media screen and (min-width: 400px) {
+  header {
+    gap: 50px;
+  }
+  h1 {
+    width: 400px;
+    font-size: 28px;
+    text-align: center;
+  }
+}

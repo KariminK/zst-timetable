@@ -1,23 +1,6 @@
 import Lesson from "./lesson/Lesson";
 import "./timetable.css";
 const Timetable = ({ timetable, day, hours, group, nameClass, classroom }) => {
-  let textDay = "Poniedziałek";
-  switch (day) {
-    case 1:
-      textDay = "Wtorek";
-      break;
-    case 2:
-      textDay = "Środa";
-      break;
-    case 3:
-      textDay = "Czwartek";
-      break;
-    case 4:
-      textDay = "Piątek";
-      break;
-    default:
-      textDay = "Poniedziałek";
-  }
   let elements = [];
   if (classroom === "") {
     const currentDayTimetable = timetable[day];
@@ -72,12 +55,6 @@ const Timetable = ({ timetable, day, hours, group, nameClass, classroom }) => {
 
   return (
     <div className="lessons">
-      <h1>
-        {textDay}{" "}
-        {classroom === ""
-          ? `(${nameClass} Grupa ${group})`
-          : `sala ${classroom}`}
-      </h1>
       <table>
         <colgroup></colgroup>
         <thead>
@@ -91,6 +68,7 @@ const Timetable = ({ timetable, day, hours, group, nameClass, classroom }) => {
         </thead>
         <tbody>{...elements}</tbody>
       </table>
+      <div className="placeholder"></div>
     </div>
   );
 };

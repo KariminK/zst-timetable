@@ -4,6 +4,7 @@ import ControlPanel from "./components/ControlPanel/ControlPanel";
 import SelectClass from "./components/SelectClass/SelectClass";
 import "./app.css";
 import SelectClassroom from "./components/SelectClassroom/SelectClassroom";
+import Heading from "./components/heading/Heading";
 function App() {
   const [day, setDay] = useState(0);
   const [group, setGroup] = useState(1);
@@ -121,17 +122,22 @@ function App() {
   };
   return (
     <>
+      <Heading
+        day={day}
+        className={classes[classId - 1]?.name}
+        classroom={classroom}
+        group={group}
+        onIncrementDay={incrementDayHandle}
+        onDecrementDay={decrementDayHandle}
+      />
       <Timetable
         day={day}
         timetable={timetable}
         hours={hours}
         group={group}
-        nameClass={classes[classId - 1]?.name}
         classroom={classroom}
       />
       <ControlPanel
-        onDecrementDay={decrementDayHandle}
-        onIncrementDay={incrementDayHandle}
         onChangeGroup={changeGroupHandle}
         onShowSelectClass={() => !showClassroomSelection && setShowForm(true)}
         onShowSelectClassroom={() =>
