@@ -1,6 +1,14 @@
 import Lesson from "./lesson/Lesson";
 import "./timetable.css";
-const Timetable = ({ timetable, day, hours, group, nameClass, classroom }) => {
+const Timetable = ({
+  timetable,
+  day,
+  hours,
+  group,
+  classroom,
+  onClassroomSel,
+  onClassSel,
+}) => {
   let elements = [];
   if (classroom === "") {
     const currentDayTimetable = timetable[day];
@@ -35,6 +43,8 @@ const Timetable = ({ timetable, day, hours, group, nameClass, classroom }) => {
             nr={index + 1}
             hour={hours[index + 1]}
             key={index}
+            onClassSel={onClassSel}
+            onClassroomSel={onClassroomSel}
           />
         );
       });
@@ -48,6 +58,8 @@ const Timetable = ({ timetable, day, hours, group, nameClass, classroom }) => {
           hour={hours[element.lessonNumber]}
           key={index}
           classname={element.class}
+          onClassSel={onClassSel}
+          onClassroomSel={onClassroomSel}
         />
       );
     });

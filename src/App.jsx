@@ -109,8 +109,16 @@ function App() {
       else setGroup(1);
     }
   };
-  const selectClassHandle = (e) => {
-    const classNum = e.target.id.slice(5, e.target.id.length);
+  const selectClassHandle = (e, classname) => {
+    let classNum;
+    if (classname) {
+      classNum =
+        classes.indexOf(
+          classes.find((el) => {
+            return el.name == classname;
+          })
+        ) + 1;
+    } else classNum = e.target.id.slice(5, e.target.id.length);
     setClassroom("");
     setClassId(classNum);
     setShowForm(false);
@@ -136,6 +144,8 @@ function App() {
         hours={hours}
         group={group}
         classroom={classroom}
+        onClassSel={selectClassHandle}
+        onClassroomSel={selectClassroomHandle}
       />
       <ControlPanel
         onChangeGroup={changeGroupHandle}
