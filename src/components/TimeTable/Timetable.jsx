@@ -66,16 +66,17 @@ const Timetable = ({
   }
 
   return (
-    <div className="lessons">
-      <table>
-        <colgroup></colgroup>
-        <thead>
+    <div className="mx-auto w-fit border-2 border-red-600 my-2 shadow-md shadow-red-900">
+      <table className="text-center text-xl sm:text-base">
+        <thead className="bg-red-600">
           <tr>
-            <th>Nr</th>
-            <th>Godzina</th>
-            <th>Lekcja</th>
-            <th>Nauczyciel</th>
-            <th>{classroom === "" ? "sala" : "klasa"}</th>
+            <th className="p-3 sm:p-2 text-white">Nr</th>
+            <th className="p-3 sm:p-2 text-white">Godzina</th>
+            <th className="p-3 sm:p-2 text-white">Lekcja</th>
+            <th className="p-3 sm:p-2 text-white sm:hidden">Nauczyciel</th>
+            <th className="p-3 sm:p-2 text-white">
+              {classroom === "" ? "sala" : "klasa"}
+            </th>
           </tr>
         </thead>
         <tbody>{...elements}</tbody>
