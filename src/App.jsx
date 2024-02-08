@@ -11,9 +11,9 @@ function App() {
   const [classId, setClassId] = useState(1);
   const [classes, setClasses] = useState([]);
   const [timetable, setTimetable] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [hours, setHours] = useState([]);
+  const [showClassSelection, setShowClassSelection] = useState(false);
   const [showClassroomSelection, setShowClassroomSelection] = useState(false);
+  const [hours, setHours] = useState([]);
   const [classroom, setClassroom] = useState("");
   const classrooms = [
     "55",
@@ -149,13 +149,17 @@ function App() {
       />
       <ControlPanel
         onChangeGroup={changeGroupHandle}
-        onShowSelectClass={() => !showClassroomSelection && setShowForm(true)}
-        onShowSelectClassroom={() =>
-          !showForm && setShowClassroomSelection(true)
-        }
+        onShowSelectClass={() => {
+          setShowClassroomSelection(false);
+          setShowClassSelection(!showClassSelection);
+        }}
+        onShowSelectClassroom={() => {
+          setShowClassSelection(false);
+          setShowClassroomSelection(!showClassroomSelection);
+        }}
       />
       <div className="placeholder"></div>
-      {showForm && (
+      {showClassSelection && (
         <SelectClass
           onSelect={selectClassHandle}
           classes={classes}
