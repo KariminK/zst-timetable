@@ -1,5 +1,3 @@
-import "./selectClassroom.css";
-
 const SelectClassroom = ({
   classrooms,
   onSelectClassroom,

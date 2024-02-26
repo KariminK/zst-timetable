@@ -1,5 +1,4 @@
 import Lesson from "./lesson/Lesson";
-import "./timetable.css";
 const Timetable = ({
   timetable,
   day,

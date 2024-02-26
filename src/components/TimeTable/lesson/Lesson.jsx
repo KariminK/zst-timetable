@@ -1,4 +1,3 @@
-import "./lesson.css";
 const Lesson = ({
   lesson,
   hour,

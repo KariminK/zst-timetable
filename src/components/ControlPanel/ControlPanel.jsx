@@ -1,4 +1,3 @@
-import "./controlPanel.css";
 const ControlPanel = ({
   onChangeGroup,
   onShowSelectClass,

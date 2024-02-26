@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Timetable from "./components/TimeTable/Timetable";
 import ControlPanel from "./components/ControlPanel/ControlPanel";
 import SelectClass from "./components/SelectClass/SelectClass";
-import "./app.css";
 import SelectClassroom from "./components/SelectClassroom/SelectClassroom";
 import Heading from "./components/heading/Heading";
 function App() {
