@@ -1,3 +1,4 @@
+import SelectionBtn from "../Buttons/SelectionBtn";
 const SelectClassroom = ({
   classrooms,
   onSelectClassroom,
@@ -8,15 +9,11 @@ const SelectClassroom = ({
     classRoomElements = classrooms.map((classroom) => {
       if (classroom) {
         return (
-          <button
-            className={
-              "p-2 border-2 m-1 text-xl grow font-medium border-red-600 rounded hover:scale-110 transition duration-200" +
-              (classroom === currentClassroom ? " bg-red-600 text-white" : "")
-            }
-            onClick={(e) => onSelectClassroom(e)}
-          >
-            {classroom}
-          </button>
+          <SelectionBtn
+            active={classroom === currentClassroom}
+            onSelect={onSelectClassroom}
+            text={classroom}
+          />
         );
       }
     });

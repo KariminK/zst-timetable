@@ -1,4 +1,4 @@
-const ClassBtn = ({ onSelect, nameOfClass, btnID, active }) => {
+const SelectionBtn = ({ active, btnID, onSelect, text }) => {
   let activeClass = active ? " bg-red-600 text-white" : "";
   return (
     <button
@@ -9,8 +9,8 @@ const ClassBtn = ({ onSelect, nameOfClass, btnID, active }) => {
       id={`Class${btnID}`}
       onClick={(e) => onSelect(e)}
     >
-      {nameOfClass}
+      {text}
     </button>
   );
 };
-export default ClassBtn;
+export default SelectionBtn;
