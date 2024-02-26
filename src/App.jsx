@@ -121,7 +121,7 @@ function App() {
     } else classNum = e.target.id.slice(5, e.target.id.length);
     setClassroom("");
     setClassId(classNum);
-    setShowForm(false);
+    setShowClassSelection(false);
   };
   const selectClassroomHandle = (e) => {
     setClassroom(e.target.textContent);

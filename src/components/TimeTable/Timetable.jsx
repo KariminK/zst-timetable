@@ -66,9 +66,9 @@ const Timetable = ({
   }
 
   return (
-    <div className="mx-auto w-fit border-2 border-red-600 my-2 shadow-md shadow-red-900">
+    <div className="mx-auto w-fit border-2 border-red-700 my-2 shadow-md shadow-red-900">
       <table className="text-center text-xl sm:text-base">
-        <thead className="bg-red-600">
+        <thead className="bg-red-700">
           <tr>
             <th className="p-3 sm:p-2 text-white">Nr</th>
             <th className="p-3 sm:p-2 text-white">Godzina</th>
