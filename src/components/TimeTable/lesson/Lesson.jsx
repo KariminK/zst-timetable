@@ -5,6 +5,7 @@ const Lesson = ({
   classname,
   onClassroomSel,
   onClassSel,
+  cell,
 }) => {
   let EventHandler;
   if (!classname) {
@@ -12,7 +13,22 @@ const Lesson = ({
   } else {
     EventHandler = (e) => onClassSel(e, classname);
   }
-  if (lesson) {
+  if (!lesson) {
+    return <tr className="lesson"></tr>;
+  }
+  if (cell) {
+    return (
+      <td className="p-3 px-1">
+        <p className="font-bold">{lesson?.subject}</p>
+        <a href="#" className=" ">
+          {lesson?.teacher}
+        </a>
+        <a href="#" className="text-blue-900 font-bold ml-2">
+          {!classname ? lesson?.room : classname}
+        </a>
+      </td>
+    );
+  } else {
     return (
       <tr className="border-b border-slate-200 odd:bg-neutral-300">
         <td className="p-2">{nr}</td>
@@ -29,8 +45,6 @@ const Lesson = ({
         </td>
       </tr>
     );
-  } else {
-    return <tr className="lesson"></tr>;
   }
 };
 export default Lesson;
