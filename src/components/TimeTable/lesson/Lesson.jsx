@@ -18,8 +18,8 @@ const Lesson = ({
   }
   if (cell) {
     return (
-      <td className="p-3 px-1">
-        <p className="font-bold">{lesson?.subject}</p>
+      <td>
+        <span className="font-bold mx-3">{lesson?.subject}</span>
         <a href="#" className=" ">
           {lesson?.teacher}
         </a>

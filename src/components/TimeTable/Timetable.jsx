@@ -1,3 +1,5 @@
+import flatLessonDay from "../../utils/flatLessonDay";
+import flipTimetable from "../../utils/flipTimetable";
 import Lesson from "./lesson/Lesson";
 const Timetable = ({
   timetable,
@@ -11,46 +13,37 @@ const Timetable = ({
   let elements = [];
   if (classroom === "") {
     if (Array.isArray(timetable)) {
-      const flatTimetable = timetable.map((lessonDay) =>
-        lessonDay.reduce((acc, curr) => {
-          if (curr.length === 0) {
-            //sprawdzam czy tablica jest pusta
-            acc.push(curr);
-          } else {
-            if (curr[0].groupName === undefined || curr[0].groupName === "1/1")
-              // sprawdzam czy daną lekcje mają wszystkie grupy
-              acc.push(curr[0]);
-            else {
-              const currGroupLesson = curr.filter((lesson) => {
-                let slicedGroupname = lesson.groupName.slice(0, 1);
-                return slicedGroupname == group;
-              }); // wyszukuje w tablicy lekcji dla danej grupy
-              if (currGroupLesson.length === 0)
-                // jeśli aktualna grupa nie ma lekcji to wrzuca pustą tablicę
-                acc.push([]);
-              else {
-                acc.push(currGroupLesson[0]);
-              }
-            }
-          }
-          return acc;
-        }, [])
-      );
-      console.log(flatTimetable);
-
-      elements = flatTimetable.map((element, index) => {
-        return (
-          <Lesson
-            lesson={element}
-            nr={index + 1}
-            hour={hours[index + 1]}
-            key={index}
-            onClassSel={onClassSel}
-            onClassroomSel={onClassroomSel}
-            cell={true}
-          />
-        );
+      let NumberOfLessons = 0;
+      const flatTimetable = timetable.map((lessonDay) => {
+        NumberOfLessons = lessonDay.length;
+        return flatLessonDay(lessonDay, group);
       });
+
+      elements = flipTimetable(NumberOfLessons, flatTimetable).map(
+        (day, index) => {
+          return (
+            <tr className=" even:bg-slate-100" key={crypto.randomUUID()}>
+              <td className="p-3 px-1 font-bold">{index + 1}.</td>
+              <td className="p-3 px-1">
+                {hours[index + 1].timeFrom} - {hours[index + 1].timeTo}
+              </td>
+              {day.map((element, index) => {
+                return (
+                  <Lesson
+                    lesson={element}
+                    nr={index + 1}
+                    hour={hours[index + 1]}
+                    key={index}
+                    onClassSel={onClassSel}
+                    onClassroomSel={onClassroomSel}
+                    cell={true}
+                  />
+                );
+              })}
+            </tr>
+          );
+        }
+      );
     }
   } else {
     elements = timetable.map((element, index) => {
@@ -74,6 +67,8 @@ const Timetable = ({
       <table className="text-center text-xl sm:text-base">
         <thead className="bg-red-700">
           <tr>
+            <th className="px-5 sm:p-2 text-white">#</th>
+            <th className="p-3 sm:p-2 text-white">Godzina</th>
             <th className="p-3 w-56 sm:p-2 text-white">Poniedziałek</th>
             <th className="p-3 w-56 sm:p-2 text-white">Wtorek</th>
             <th className="p-3 w-56 sm:p-2 text-white">Środa</th>
