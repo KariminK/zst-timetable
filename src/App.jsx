@@ -13,6 +13,7 @@ function App() {
   const [showClassSelection, setShowClassSelection] = useState(false);
   const [showClassroomSelection, setShowClassroomSelection] = useState(false);
   const [hours, setHours] = useState([]);
+  const [allDayView, setAllDayView] = useState(true);
   const [classroom, setClassroom] = useState("");
   const classrooms = [
     "55",
@@ -145,6 +146,7 @@ function App() {
         classroom={classroom}
         onClassSel={selectClassHandle}
         onClassroomSel={selectClassroomHandle}
+        allDayView={allDayView}
       />
       <ControlPanel
         onChangeGroup={changeGroupHandle}
@@ -156,6 +158,7 @@ function App() {
           setShowClassSelection(false);
           setShowClassroomSelection(!showClassroomSelection);
         }}
+        onChangeView={() => setAllDayView(!allDayView)}
       />
       <div className="placeholder"></div>
       {showClassSelection && (

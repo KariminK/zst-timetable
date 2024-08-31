@@ -30,7 +30,7 @@ const Lesson = ({
     );
   } else {
     return (
-      <tr className="border-b border-slate-200 odd:bg-neutral-300">
+      <tr className="border-b border-slate-200 odd:bg-slate-100">
         <td className="p-2">{nr}</td>
         <td className="p-2">
           {hour?.timeFrom} - {hour?.timeTo}
