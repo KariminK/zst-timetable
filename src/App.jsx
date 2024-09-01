@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import Timetable from "./components/TimeTable/Timetable";
 import ControlPanel from "./components/ControlPanel/ControlPanel";
 import SelectClass from "./components/SelectClass/SelectClass";
 import SelectClassroom from "./components/SelectClassroom/SelectClassroom";
 import Heading from "./components/heading/Heading";
+import DayTimetable from "./components/TimeTable/DayTimetable";
+import FullTimetable from "./components/TimeTable/FullTimetable";
 function App() {
   const [day, setDay] = useState(0);
   const [group, setGroup] = useState(1);
@@ -13,7 +14,7 @@ function App() {
   const [showClassSelection, setShowClassSelection] = useState(false);
   const [showClassroomSelection, setShowClassroomSelection] = useState(false);
   const [hours, setHours] = useState([]);
-  const [allDayView, setAllDayView] = useState(true);
+  const [allDayView, setAllDayView] = useState(false);
   const [classroom, setClassroom] = useState("");
   const classrooms = [
     "55",
@@ -61,7 +62,7 @@ function App() {
   const fetchClassData = async () => {
     const [hoursRes, tableRes, classRes] = await Promise.all([
       fetch("http://127.0.0.1:3000/hours?id=" + classId),
-      fetch("http://127.0.0.1:3000/table?id=" + classId),
+      fetch(`http://127.0.0.1:3000/table?id=${classId}&group=${group}`),
       fetch("http://127.0.0.1:3000/classes"),
     ]);
     const [hoursData, tableData, classData] = await Promise.all([
@@ -69,6 +70,7 @@ function App() {
       tableRes.json(),
       classRes.json(),
     ]);
+
     setHours(hoursData);
     setTimetable(tableData);
     setClasses(classData.classes);
@@ -91,7 +93,7 @@ function App() {
   };
   useEffect(() => {
     fetchClassData();
-  }, [classId]);
+  }, [classId, group, day, allDayView]);
   useEffect(() => {
     fetchClassroomData();
   }, [classroom, day]);
@@ -138,16 +140,27 @@ function App() {
         onIncrementDay={incrementDayHandle}
         onDecrementDay={decrementDayHandle}
       />
-      <Timetable
-        day={day}
-        timetable={timetable}
-        hours={hours}
-        group={group}
-        classroom={classroom}
-        onClassSel={selectClassHandle}
-        onClassroomSel={selectClassroomHandle}
-        allDayView={allDayView}
-      />
+      {allDayView ? (
+        <FullTimetable
+          timetable={timetable}
+          hours={hours}
+          group={group}
+          classroom={classroom}
+          onClassSel={selectClassHandle}
+          onClassroomSel={selectClassroomHandle}
+        />
+      ) : (
+        <DayTimetable
+          day={day}
+          timetable={timetable}
+          hours={hours}
+          group={group}
+          classroom={classroom}
+          onClassSel={selectClassHandle}
+          onClassroomSel={selectClassroomHandle}
+        />
+      )}
+
       <ControlPanel
         onChangeGroup={changeGroupHandle}
         onShowSelectClass={() => {
@@ -158,7 +171,10 @@ function App() {
           setShowClassSelection(false);
           setShowClassroomSelection(!showClassroomSelection);
         }}
-        onChangeView={() => setAllDayView(!allDayView)}
+        onChangeView={() => {
+          console.log("triggered!");
+          setAllDayView(!allDayView);
+        }}
       />
       <div className="placeholder"></div>
       {showClassSelection && (
