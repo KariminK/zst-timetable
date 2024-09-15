@@ -8,20 +8,20 @@ const FullTimetable = ({
 }) => {
   let elements = [];
 
-  if (!Array.isArray(timetable))
+  if (!Array.isArray(timetable) || !Array.isArray(timetable[0]))
     return (
       <h1 className="text-center text-4xl my-5 font-bold">Ładowanie...</h1>
     );
-
-  if (classroom === "") {
-    elements = timetable.map((day, index) => {
-      return (
-        <tr className=" even:bg-slate-100" key={crypto.randomUUID()}>
-          <td className="p-3 px-1 font-bold">{index + 1}.</td>
-          <td className="p-3 px-1">
-            {hours[index + 1].timeFrom} - {hours[index + 1].timeTo}
-          </td>
-          {day.map((element, index) => {
+  elements = timetable.map((day, index) => {
+    if (!Array.isArray(day)) return;
+    return (
+      <tr className=" even:bg-slate-100" key={crypto.randomUUID()}>
+        <td className="p-3 px-1 font-bold">{index + 1}.</td>
+        <td className="p-3 px-1">
+          {hours[index + 1]?.timeFrom || ""} - {hours[index + 1]?.timeTo || ""}
+        </td>
+        {day.map((element, index) => {
+          if (classroom === "")
             return (
               <Lesson
                 lesson={element}
@@ -33,26 +33,23 @@ const FullTimetable = ({
                 cell={true}
               />
             );
-          })}
-        </tr>
-      );
-    });
-  } else {
-    elements = timetable.map((element, index) => {
-      return (
-        <Lesson
-          lesson={element}
-          nr={element.lessonNumber}
-          hour={hours[element.lessonNumber]}
-          key={index}
-          classname={element.class}
-          onClassSel={onClassSel}
-          onClassroomSel={onClassroomSel}
-        />
-      );
-    });
-  }
-
+          else
+            return (
+              <Lesson
+                lesson={element}
+                nr={element.lessonNumber}
+                hour={hours[element.lessonNumber]}
+                key={index}
+                classname={element.class}
+                onClassSel={onClassSel}
+                onClassroomSel={onClassroomSel}
+                cell={true}
+              />
+            );
+        })}
+      </tr>
+    );
+  });
   return (
     <div className="mx-auto w-fit border-2 border-red-700 my-2 shadow-md shadow-red-900 rounded-t-lg">
       <table className="text-center text-xl sm:text-base">

@@ -59,44 +59,49 @@ function App() {
     "75",
   ];
   classrooms.sort();
-  const fetchClassData = async () => {
-    const [hoursRes, tableRes, classRes] = await Promise.all([
-      fetch("http://127.0.0.1:3000/hours?id=" + classId),
-      fetch(`http://127.0.0.1:3000/table?id=${classId}&group=${group}`),
-      fetch("http://127.0.0.1:3000/classes"),
-    ]);
-    const [hoursData, tableData, classData] = await Promise.all([
-      hoursRes.json(),
-      tableRes.json(),
-      classRes.json(),
-    ]);
 
-    setHours(hoursData);
-    setTimetable(tableData);
-    setClasses(classData.classes);
+  const fetchData = async (url) => {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
   };
-  const fetchClassroomData = async () => {
-    if (classroom !== "") {
-      const [classroomRes, hoursRes] = await Promise.all([
-        fetch(
-          `http://127.0.0.1:3000/classRoomLessons?day=${day}&classroom=${classroom}`
-        ),
-        fetch("http://127.0.0.1:3000/hours?id=20"),
-      ]);
-      const [classroomData, hoursData] = await Promise.all([
-        classroomRes.json(),
-        hoursRes.json(),
-      ]);
-      setTimetable(classroomData);
-      setHours(hoursData);
+
+  useEffect(() => {
+    let url = `http://127.0.0.1:3000/${classId}/${group}/table?day=${day}`;
+    if (classroom !== "")
+      url = `http://127.0.0.1:3000/${classroom}/table?day=${day}`;
+    if (allDayView) {
+      if (classroom !== "") url = `http://127.0.0.1:3000/${classroom}/table`;
+      else url = `http://127.0.0.1:3000/${classId}/${group}/table`;
     }
-  };
+
+    console.log(
+      "EFFECT FIRED! URL: ",
+      url,
+      "\n AllDayView: ",
+      allDayView,
+      "\n day: ",
+      day,
+      "\n hours: ",
+      hours
+    );
+    fetchData(url).then((data) => {
+      setTimetable(data);
+    });
+  }, [classId, group, day, classroom, allDayView]);
   useEffect(() => {
-    fetchClassData();
-  }, [classId, group, day, allDayView]);
+    fetchData(
+      `http://127.0.0.1:3000/hours?id=${classroom ? "20" : classId}`
+    ).then((data) => {
+      setHours(data);
+    });
+  }, [classId, classroom, allDayView]);
   useEffect(() => {
-    fetchClassroomData();
-  }, [classroom, day]);
+    fetchData(`http://127.0.0.1:3000/classes`).then((data) => {
+      setClasses(data.classes);
+    });
+  }, []);
+
   const incrementDayHandle = () => {
     if (day != 4) setDay(day + 1);
   };
@@ -151,10 +156,8 @@ function App() {
         />
       ) : (
         <DayTimetable
-          day={day}
           timetable={timetable}
           hours={hours}
-          group={group}
           classroom={classroom}
           onClassSel={selectClassHandle}
           onClassroomSel={selectClassroomHandle}
@@ -172,7 +175,6 @@ function App() {
           setShowClassroomSelection(!showClassroomSelection);
         }}
         onChangeView={() => {
-          console.log("triggered!");
           setAllDayView(!allDayView);
         }}
       />
