@@ -1,4 +1,11 @@
-const ControlBtn = ({ text, onButtonClick }) => {
+import { MouseEventHandler } from "react";
+
+type props = {
+  text: string;
+  onButtonClick: MouseEventHandler<HTMLButtonElement>;
+};
+
+const ControlBtn = ({ text, onButtonClick }: props) => {
   return (
     <button
       id="changeGroupBtn"

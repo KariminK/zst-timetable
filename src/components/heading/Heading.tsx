@@ -1,4 +1,13 @@
+import { MouseEventHandler } from "react";
 import SwitchDayBtn from "../Buttons/SwitchDayBtn";
+type props = {
+  day: number;
+  classroom: string;
+  className: string;
+  group: number;
+  onIncrementDay: MouseEventHandler<HTMLButtonElement>;
+  onDecrementDay: MouseEventHandler<HTMLButtonElement>;
+};
 const Heading = ({
   day,
   classroom,
@@ -6,7 +15,7 @@ const Heading = ({
   group,
   onIncrementDay,
   onDecrementDay,
-}) => {
+}: props) => {
   let textDay;
   switch (day) {
     case 1:

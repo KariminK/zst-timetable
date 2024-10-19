@@ -1,9 +1,17 @@
+import { MouseEventHandler } from "react";
+
+type props = {
+  onChangeGroup: MouseEventHandler<HTMLButtonElement>;
+  onShowSelectClass: MouseEventHandler<HTMLButtonElement>;
+  onShowSelectClassroom: MouseEventHandler<HTMLButtonElement>;
+  onChangeView: MouseEventHandler<HTMLButtonElement>;
+};
 const ControlPanel = ({
   onChangeGroup,
   onShowSelectClass,
   onShowSelectClassroom,
   onChangeView,
-}) => {
+}: props) => {
   return (
     <div className="w-fit mx-auto mt-5 mb-2">
       <div className="flex flex-wrap gap-2">

@@ -18,7 +18,6 @@ const DayTimetable = ({
       return (
         <Lesson
           lesson={element}
-          nr={index + 1}
           hour={hours[index + 1]}
           key={index}
           onClassSel={onClassSel}
@@ -31,7 +30,6 @@ const DayTimetable = ({
       return (
         <Lesson
           lesson={element}
-          nr={element.lessonNumber}
           hour={hours[element.lessonNumber]}
           key={index}
           classname={element.class}

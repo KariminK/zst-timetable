@@ -1,5 +1,14 @@
-const SelectionBtn = ({ active, btnID, onSelect, text }) => {
-  let activeClass = active ? " bg-red-600 text-white" : "";
+import { MouseEventHandler } from "react";
+
+type props = {
+  active: boolean;
+  btnID: string;
+  onSelect: MouseEventHandler<HTMLButtonElement>;
+  text: string;
+};
+
+const SelectionBtn = ({ active, btnID, onSelect, text }: props) => {
+  const activeClass = active ? " bg-red-600 text-white" : "";
   return (
     <button
       className={
@@ -7,7 +16,7 @@ const SelectionBtn = ({ active, btnID, onSelect, text }) => {
         activeClass
       }
       id={`Class${btnID}`}
-      onClick={(e) => onSelect(e)}
+      onClick={onSelect}
     >
       {text}
     </button>

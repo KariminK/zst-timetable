@@ -67,12 +67,12 @@ function App() {
   };
 
   useEffect(() => {
-    let url = `http://127.0.0.1:3000/${classId}/${group}/table?day=${day}`;
+    let url = `http://127.0.0.1:3001/${classId}/${group}/table?day=${day}`;
     if (classroom !== "")
-      url = `http://127.0.0.1:3000/${classroom}/table?day=${day}`;
+      url = `http://127.0.0.1:3001/${classroom}/table?day=${day}`;
     if (allDayView) {
-      if (classroom !== "") url = `http://127.0.0.1:3000/${classroom}/table`;
-      else url = `http://127.0.0.1:3000/${classId}/${group}/table`;
+      if (classroom !== "") url = `http://127.0.0.1:3001/${classroom}/table`;
+      else url = `http://127.0.0.1:3001/${classId}/${group}/table`;
     }
 
     console.log(
@@ -91,13 +91,14 @@ function App() {
   }, [classId, group, day, classroom, allDayView]);
   useEffect(() => {
     fetchData(
-      `http://127.0.0.1:3000/hours?id=${classroom ? "20" : classId}`
+      `http://127.0.0.1:3001/hours?id=${classroom ? "20" : classId}`
     ).then((data) => {
       setHours(data);
+      console.log(data);
     });
   }, [classId, classroom, allDayView]);
   useEffect(() => {
-    fetchData(`http://127.0.0.1:3000/classes`).then((data) => {
+    fetchData(`http://127.0.0.1:3001/classes`).then((data) => {
       setClasses(data.classes);
     });
   }, []);

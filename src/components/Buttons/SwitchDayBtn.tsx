@@ -1,4 +1,10 @@
-const SwitchDayBtn = ({ direction, onButtonClick }) => {
+import { EventHandler, SyntheticEvent } from "react";
+
+type props = {
+  direction: "left" | "right";
+  onButtonClick: EventHandler<SyntheticEvent>;
+};
+const SwitchDayBtn = ({ direction, onButtonClick }: props) => {
   return (
     <button
       id="decrementDay"
