@@ -1,11 +1,25 @@
+import { MouseEventHandler } from "react";
+import { hour, lesson } from "../../types";
 import Lesson from "./lesson/Lesson";
+
+type props = {
+  timetable: lesson[];
+  hours: hour[];
+  classroom: string;
+  onClassroomSel: MouseEventHandler<HTMLTableCellElement>;
+  onClassSel: (
+    e: React.MouseEvent<HTMLTableCellElement, MouseEvent>,
+    classname: string
+  ) => void;
+};
+
 const DayTimetable = ({
   timetable,
   hours,
   classroom,
   onClassroomSel,
   onClassSel,
-}) => {
+}: props) => {
   let elements = [];
 
   if (!Array.isArray(timetable))
@@ -22,6 +36,7 @@ const DayTimetable = ({
           key={index}
           onClassSel={onClassSel}
           onClassroomSel={onClassroomSel}
+          cell={false}
         />
       );
     });
@@ -30,11 +45,12 @@ const DayTimetable = ({
       return (
         <Lesson
           lesson={element}
-          hour={hours[element.lessonNumber]}
+          hour={hours[element.lessonNumber ? element.lessonNumber : index]}
           key={index}
           classname={element.class}
           onClassSel={onClassSel}
           onClassroomSel={onClassroomSel}
+          cell={false}
         />
       );
     });

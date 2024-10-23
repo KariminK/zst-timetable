@@ -4,7 +4,7 @@ import { hour, lesson } from "../../../types";
 type props = {
   lesson: lesson;
   hour: hour;
-  classname: string;
+  classname?: string;
   onClassroomSel: MouseEventHandler<HTMLTableCellElement>;
   onClassSel: (
     e: React.MouseEvent<HTMLTableCellElement, MouseEvent>,

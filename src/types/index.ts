@@ -10,6 +10,8 @@ export type lesson = {
   teacher: string;
   teacherId: string;
   room: string;
+  lessonNumber?: number;
+  class?: string;
 };
 
 export type hour = {
