@@ -27,7 +27,7 @@ const Lesson = ({
   } else {
     EventHandler = (e) => onClassSel(e, classname);
   }
-  if (!lesson) {
+  if (!lesson || !hour) {
     return <tr className="lesson"></tr>;
   }
   if (cell) {

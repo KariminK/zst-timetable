@@ -3,16 +3,18 @@ export type schoolClass = {
   value: string;
 };
 
-export type classrooms = Array<string>;
+export type classrooms = string[];
 
-export type lesson = {
+export interface lesson {
   subject: string;
   teacher: string;
   teacherId: string;
   room: string;
-  lessonNumber?: number;
-  class?: string;
-};
+}
+export interface classroomLesson extends lesson {
+  lessonNumber: number;
+  class: string;
+}
 
 export type hour = {
   number: number;

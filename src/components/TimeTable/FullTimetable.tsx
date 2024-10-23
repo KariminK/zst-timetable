@@ -1,11 +1,25 @@
+import { MouseEventHandler } from "react";
 import Lesson from "./lesson/Lesson";
+import { lesson, classroomLesson, hour } from "../../types";
+
+type props = {
+  timetable: lesson[][] | classroomLesson[][];
+  hours: hour[];
+  classroom: string;
+  onClassroomSel: MouseEventHandler<HTMLTableCellElement>;
+  onClassSel: (
+    e: React.MouseEvent<HTMLTableCellElement, MouseEvent>,
+    classname: string
+  ) => void;
+};
+
 const FullTimetable = ({
   timetable,
   hours,
   classroom,
   onClassroomSel,
   onClassSel,
-}) => {
+}: props) => {
   let elements = [];
 
   if (!Array.isArray(timetable) || !Array.isArray(timetable[0]))
@@ -18,14 +32,13 @@ const FullTimetable = ({
       <tr className=" even:bg-slate-100" key={crypto.randomUUID()}>
         <td className="p-3 px-1 font-bold">{index + 1}.</td>
         <td className="p-3 px-1">
-          {hours[index + 1]?.timeFrom || ""} - {hours[index + 1]?.timeTo || ""}
+          {hours[index + 1].timeFrom || ""} - {hours[index + 1].timeTo || ""}
         </td>
         {day.map((element, index) => {
           if (classroom === "")
             return (
               <Lesson
                 lesson={element}
-                nr={index + 1}
                 hour={hours[index + 1]}
                 key={index}
                 onClassSel={onClassSel}
@@ -33,11 +46,10 @@ const FullTimetable = ({
                 cell={true}
               />
             );
-          else
+          else if ("class" in element) {
             return (
               <Lesson
                 lesson={element}
-                nr={element.lessonNumber}
                 hour={hours[element.lessonNumber]}
                 key={index}
                 classname={element.class}
@@ -46,6 +58,7 @@ const FullTimetable = ({
                 cell={true}
               />
             );
+          }
         })}
       </tr>
     );

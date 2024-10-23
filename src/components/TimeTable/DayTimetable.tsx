@@ -1,9 +1,9 @@
 import { MouseEventHandler } from "react";
-import { hour, lesson } from "../../types";
+import { classroomLesson, hour, lesson } from "../../types";
 import Lesson from "./lesson/Lesson";
 
 type props = {
-  timetable: lesson[];
+  timetable: lesson[] | classroomLesson[];
   hours: hour[];
   classroom: string;
   onClassroomSel: MouseEventHandler<HTMLTableCellElement>;
@@ -42,17 +42,19 @@ const DayTimetable = ({
     });
   } else {
     elements = timetable.map((element, index) => {
-      return (
-        <Lesson
-          lesson={element}
-          hour={hours[element.lessonNumber ? element.lessonNumber : index]}
-          key={index}
-          classname={element.class}
-          onClassSel={onClassSel}
-          onClassroomSel={onClassroomSel}
-          cell={false}
-        />
-      );
+      if ("class" in element) {
+        return (
+          <Lesson
+            lesson={element}
+            hour={hours[element.lessonNumber]}
+            key={index}
+            classname={element.class}
+            onClassSel={onClassSel}
+            onClassroomSel={onClassroomSel}
+            cell={false}
+          />
+        );
+      }
     });
   }
 
