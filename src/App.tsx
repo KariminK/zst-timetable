@@ -1,19 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, MouseEvent } from "react";
 import ControlPanel from "./components/ControlPanel/ControlPanel";
 import SelectClass from "./components/SelectClass/SelectClass";
 import SelectClassroom from "./components/SelectClassroom/SelectClassroom";
 import Heading from "./components/heading/Heading";
 import DayTimetable from "./components/TimeTable/DayTimetable";
 import FullTimetable from "./components/TimeTable/FullTimetable";
+import { classroomLesson, hour, lesson, schoolClass } from "./types";
+
+type timetable =
+  | lesson[]
+  | lesson[][]
+  | classroomLesson[]
+  | classroomLesson[][];
+
 function App() {
   const [day, setDay] = useState(0);
   const [group, setGroup] = useState(1);
   const [classId, setClassId] = useState(1);
-  const [classes, setClasses] = useState([]);
-  const [timetable, setTimetable] = useState([]);
+  const [classes, setClasses] = useState<schoolClass[]>([]);
+  const [timetable, setTimetable] = useState<timetable>([]);
   const [showClassSelection, setShowClassSelection] = useState(false);
   const [showClassroomSelection, setShowClassroomSelection] = useState(false);
-  const [hours, setHours] = useState([]);
+  const [hours, setHours] = useState<hour[]>([]);
   const [allDayView, setAllDayView] = useState(false);
   const [classroom, setClassroom] = useState("");
   const classrooms = [
@@ -60,7 +68,7 @@ function App() {
   ];
   classrooms.sort();
 
-  const fetchData = async (url) => {
+  const fetchData = async (url: string) => {
     const res = await fetch(url);
     const data = await res.json();
     return data;
@@ -117,14 +125,14 @@ function App() {
       else setGroup(1);
     }
   };
-  const selectClassHandle = (e, classname) => {
+  const selectClassHandle = (e: MouseEvent, classname: string) => {
     let classNum;
     if (classname) {
       classNum =
         classes.indexOf(
           classes.find((el) => {
             return el.name == classname;
-          })
+          }) ? 
         ) + 1;
     } else classNum = e.target.id.slice(5, e.target.id.length);
     setClassroom("");
