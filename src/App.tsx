@@ -125,21 +125,16 @@ function App() {
       else setGroup(1);
     }
   };
-  const selectClassHandle = (e: MouseEvent, classname: string) => {
-    let classNum;
-    if (classname) {
-      classNum =
-        classes.indexOf(
-          classes.find((el) => {
-            return el.name == classname;
-          }) ? 
-        ) + 1;
-    } else classNum = e.target.id.slice(5, e.target.id.length);
+  const selectClassHandle = (
+    e: MouseEvent<HTMLButtonElement>,
+    classname: schoolClass
+  ) => {
+    const classNum = classes.indexOf(classname) + 1;
     setClassroom("");
     setClassId(classNum);
     setShowClassSelection(false);
   };
-  const selectClassroomHandle = (e) => {
+  const selectClassroomHandle = (e: MouseEvent<HTMLButtonElement>) => {
     setClassroom(e.target.textContent);
     setShowClassroomSelection(false);
     setClassId(-1);
